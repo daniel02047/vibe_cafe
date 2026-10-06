@@ -1,0 +1,600 @@
+/* ========================================================
+   바이브 카페 주문서 스타일시트 (style.css)
+   ======================================================== */
+
+/* 전역 기본 설정 및 여백 초기화 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: '맑은 고딕', 'Malgun Gothic', sans-serif;
+  background-color: #faf6f0; /* 카페 느낌의 따뜻한 베이지 배경 */
+  color: #333333;
+  line-height: 1.6;
+  padding: 30px 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 전체 컨테이너 너비 제한 (최대 520px, 가운데 정렬) */
+header,
+main {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* 페이지 상단 헤더 영역 */
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* 카페 로고 (☕ 이모지 크게 및 김 나는 애니메이션) */
+.logo {
+  display: inline-block;
+  position: relative;
+  font-size: 52px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  user-select: none;
+}
+
+/* 김(증기) 공통 스타일 */
+.logo::before,
+.logo::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  width: 6px;
+  height: 20px;
+  background: linear-gradient(to top, rgba(160, 130, 110, 0.6), rgba(220, 205, 190, 0.1));
+  border-radius: 10px;
+  filter: blur(1.8px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 첫 번째 김 줄기 (좌측) */
+.logo::before {
+  left: 36%;
+  animation: steamRiseLeft 2.2s infinite ease-out;
+}
+
+/* 두 번째 김 줄기 (우측, 약간의 시간차 적용) */
+.logo::after {
+  left: 54%;
+  animation: steamRiseRight 2.2s infinite ease-out;
+  animation-delay: 1.1s;
+}
+
+/* 김이 왼쪽으로 살랑이며 피어오르는 키프레임 */
+@keyframes steamRiseLeft {
+  0% {
+    transform: translateY(2px) scaleX(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.75;
+    transform: translateY(-6px) scaleX(1) translateX(-2px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-18px) scaleX(1.3) translateX(3px);
+  }
+  80% {
+    opacity: 0.2;
+    transform: translateY(-28px) scaleX(1.6) translateX(-3px);
+  }
+  100% {
+    transform: translateY(-38px) scaleX(2) translateX(-5px);
+    opacity: 0;
+  }
+}
+
+/* 김이 오른쪽으로 살랑이며 피어오르는 키프레임 */
+@keyframes steamRiseRight {
+  0% {
+    transform: translateY(2px) scaleX(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.75;
+    transform: translateY(-6px) scaleX(1) translateX(2px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-18px) scaleX(1.3) translateX(-3px);
+  }
+  80% {
+    opacity: 0.2;
+    transform: translateY(-28px) scaleX(1.6) translateX(3px);
+  }
+  100% {
+    transform: translateY(-38px) scaleX(2) translateX(5px);
+    opacity: 0;
+  }
+}
+
+/* 카페 이름 */
+header h1 {
+  font-size: 28px;
+  color: #6b4226; /* 브라운 톤 */
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* 부제 */
+header p {
+  font-size: 15px;
+  color: #8c6d53; /* 부드러운 중간 브라운 */
+}
+
+/* 주문서 메인 카드 (둥근 모서리, 부드러운 그림자) */
+main {
+  background-color: #ffffff;
+  padding: 28px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(107, 66, 38, 0.08); /* 따뜻하고 부드러운 그림자 */
+}
+
+/* 폼 그룹 레이아웃 */
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* 레이블 기본 스타일 */
+.form-group > label,
+fieldset.form-group legend {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #4a2c16;
+  margin-bottom: 8px;
+}
+
+/* 라디오 / 체크박스 fieldset 레이아웃 (가로 나란히 배치, gap 간격) */
+fieldset.form-group {
+  border: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px; /* 항목 간 간격 */
+  align-items: center;
+}
+
+fieldset.form-group legend {
+  width: 100%;
+}
+
+/* 라디오 & 체크박스 항목 래퍼 */
+fieldset.form-group > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* 라디오/체크박스 텍스트 레이블 */
+fieldset.form-group > div label {
+  font-size: 14px;
+  color: #444444;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 라디오/체크박스 포인트 색상 */
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: #6b4226;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* 입력칸 기본 스타일 (너비 100%, 패딩 10px, 둥근 모서리 8px) */
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d8cfc4;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #333333;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 입력칸 포커스 시: 테두리 갈색 + 연한 갈색 그림자 */
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #6b4226;
+  box-shadow: 0 0 0 3px rgba(107, 66, 38, 0.15);
+}
+
+/* 요청사항 텍스트 영역 */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 예상 금액 표시 영역 (큰 글씨 24px, 갈색, 굵게, 가운데 정렬) */
+.price-area {
+  font-size: 24px;
+  color: #6b4226;
+  font-weight: bold;
+  text-align: center;
+  padding: 16px 0;
+  margin: 10px 0 18px 0;
+  border-top: 1px dashed #e6ded3;
+  border-bottom: 1px dashed #e6ded3;
+}
+
+/* 버튼 그룹 (가로 2열 배치) */
+.button-group {
+  display: flex;
+  gap: 12px;
+}
+
+/* 버튼 공통 스타일 */
+button {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 주문하기 버튼 (갈색 배경 #6b4226, 흰색 글씨, hover시 약간 밝게 + 살짝 떠오르는 효과) */
+button[type="submit"] {
+  background-color: #6b4226;
+  color: #ffffff;
+  border: 1px solid #6b4226;
+}
+
+button[type="submit"]:hover {
+  background-color: #855331; /* 살짝 밝은 브라운 */
+  border-color: #855331;
+  transform: translateY(-3px); /* 마우스를 올리면 위로 살짝 떠오름 */
+  box-shadow: 0 6px 14px rgba(107, 66, 38, 0.28); /* 떠오르는 입체 그림자 */
+}
+
+button[type="submit"]:active {
+  background-color: #55341e;
+  transform: translateY(0); /* 클릭 시 원래 위치 */
+  box-shadow: none;
+}
+
+/* 다시 작성 버튼 (흰 배경 + 갈색 테두리) */
+button[type="reset"] {
+  background-color: #ffffff;
+  color: #6b4226;
+  border: 1.5px solid #6b4226;
+}
+
+button[type="reset"]:hover {
+  background-color: #f7f1eb; /* 연한 베이지 호버 효과 */
+}
+
+button[type="reset"]:active {
+  background-color: #eee4d8;
+}
+
+/* 주문 확인 메시지 (연두색 배경, 초록 글씨, 둥근 모서리) */
+/* 주문 확인 모달 오버레이 (화면 전체 덮기 & 가운데 정렬) */
+.confirmation-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.45); /* 어두운 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+  backdrop-filter: blur(3px); /* 배경 살짝 흐림 효과 */
+}
+
+/* 주문 확인 팝업 카드 (화면 중앙 모달) */
+.confirmation-box {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 30px 24px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid #ebdcd0;
+  animation: modalPopIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 팝업 상단 커피/주문 아이콘 */
+.confirmation-icon {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+/* 팝업 제목 */
+.confirmation-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #6b4226;
+  margin-bottom: 14px;
+}
+
+/* 주문 확인 본문 메시지 (연두색 포인트 박스) */
+.confirmation-text {
+  font-size: 15px;
+  color: #2e7d32;
+  background-color: #eef8ee;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  word-break: keep-all;
+}
+
+/* 팝업 닫기(확인) 버튼 */
+.confirmation-close-btn {
+  background-color: #6b4226;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.confirmation-close-btn:hover {
+  background-color: #855331;
+  transform: translateY(-2px);
+}
+
+.confirmation-close-btn:active {
+  transform: translateY(0);
+}
+
+/* 팝업 등장 애니메이션 키프레임 */
+@keyframes modalPopIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ========================================================
+   탭 메뉴 스타일
+   ======================================================== */
+.tab-menu {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+  border-bottom: 2px solid #ecdcd0;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #a8927e; /* 선택 안 된 탭: 연한 갈색 글씨 */
+  padding: 10px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  flex: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #6b4226;
+}
+
+/* 선택된 탭: 갈색 글씨 + 갈색 밑줄 */
+.tab-btn.active {
+  color: #6b4226;
+  font-weight: 700;
+  border-bottom: 3px solid #6b4226;
+}
+
+/* 주문 내역 건수 둥근 갈색 배지 */
+.order-badge {
+  background-color: #6b4226;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  line-height: 1.2;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ========================================================
+   주문 내역 목록 스타일
+   ======================================================== */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* 주문 1건 = 베이지 카드, 왼쪽에 갈색 세로줄 */
+.order-card {
+  background-color: #faf6f0; /* 베이지 배경 */
+  border-left: 4px solid #6b4226; /* 왼쪽에 갈색 세로줄 */
+  border-radius: 8px;
+  padding: 14px 16px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(107, 66, 38, 0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 66, 38, 0.1);
+}
+
+/* 1줄: #1 홍길동님 · 5,000원 */
+.order-card-header {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6b4226;
+  margin-bottom: 5px;
+  padding-right: 52px; /* 취소 버튼과 겹치지 않게 여백 */
+}
+
+/* 2줄: 카페라떼 M사이즈 (샷 추가) 1잔 */
+.order-card-body {
+  font-size: 14px;
+  color: #333333;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+/* 3줄: 요청사항(있을 때만) · 주문 시간 */
+.order-card-footer {
+  font-size: 12px;
+  color: #8c7360;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+/* 카드 오른쪽 위의 "취소" 버튼 */
+.order-cancel-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #ffffff;
+  color: #a63d2f;
+  border: 1px solid #e2cec0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  cursor: pointer;
+  flex: none;
+  transition: all 0.2s ease;
+}
+
+.order-cancel-btn:hover {
+  background-color: #fceeed;
+  border-color: #a63d2f;
+}
+
+/* 주문이 없을 때 안내 메시지 */
+.empty-history {
+  text-align: center;
+  padding: 40px 16px;
+  color: #8c7360;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* 목록 아래 요약 및 전체 삭제 영역 */
+.history-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px dashed #e6ded3;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* 총 주문 금액 텍스트 */
+.total-summary-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6b4226;
+}
+
+/* 내역 모두 지우기 버튼 */
+.clear-all-btn {
+  background-color: #ffffff;
+  color: #8c6d53;
+  border: 1px solid #d8cfc4;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  cursor: pointer;
+  flex: none;
+  transition: all 0.2s ease;
+}
+
+.clear-all-btn:hover {
+  background-color: #f7f1eb;
+  color: #6b4226;
+  border-color: #6b4226;
+}
+
+/* hidden 클래스 또는 hidden 속성이 붙으면 화면에서 숨기기 */
+.hidden,
+[hidden] {
+  display: none !important;
+}
+
+/* 모바일 반응형 디자인 (작은 화면에서도 깨지지 않게 최적화) */
+@media (max-width: 480px) {
+  body {
+    padding: 16px 10px;
+  }
+
+  main {
+    padding: 20px 16px;
+  }
+
+  .logo {
+    font-size: 44px;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  .price-area {
+    font-size: 21px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 11px;
+  }
+}
+
